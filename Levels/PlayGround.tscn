@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkg8i26tmrxja"]
+
+[ext_resource type="PackedScene" uid="uid://dla0fgaitiiv7" path="res://Scenes/Player.tscn" id="1_p4jhk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3nqhd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hmafb"]
+size = Vector3(20, 0.1, 20)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_suu6b"]
+size = Vector2(20, 20)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1c558"]
+
+[sub_resource type="Sky" id="Sky_0u75f"]
+sky_material = SubResource("ProceduralSkyMaterial_1c558")
+
+[sub_resource type="Environment" id="Environment_cnyr5"]
+sky = SubResource("Sky_0u75f")
+ambient_light_source = 3
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_3nqhd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_hmafb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_suu6b")
+skeleton = NodePath("../..")
+
+[node name="Knight" parent="." instance=ExtResource("1_p4jhk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.155748, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.4835, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cnyr5")
